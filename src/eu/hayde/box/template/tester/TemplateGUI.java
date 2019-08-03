@@ -23,6 +23,7 @@ public class TemplateGUI extends javax.swing.JFrame {
 	/*
 	 * Create the file choosers
 	 */
+	private JFileChooser fcBaseDir = new JFileChooser();
 	private JFileChooser fcTemplate = new JFileChooser();
 	private JFileChooser fcXML = new JFileChooser();
 	private JFileChooser fcOuput = new JFileChooser();
@@ -48,6 +49,8 @@ public class TemplateGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblBaseDir = new javax.swing.JLabel();
+        txtBaseDir = new javax.swing.JTextField();
         lblTemplate = new javax.swing.JLabel();
         txtTemplate = new javax.swing.JTextField();
         lblXML = new javax.swing.JLabel();
@@ -58,6 +61,7 @@ public class TemplateGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtError = new javax.swing.JTextArea();
         lblError = new javax.swing.JLabel();
+        btnBaseDir = new javax.swing.JLabel();
         btnTemplate = new javax.swing.JLabel();
         btnXML = new javax.swing.JLabel();
         btnOutput = new javax.swing.JLabel();
@@ -67,6 +71,10 @@ public class TemplateGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("hayde Template Tester Version 0.5");
         setBackground(new java.awt.Color(255, 255, 255));
+
+        lblBaseDir.setText("BaseDir");
+
+        txtBaseDir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblTemplate.setText("Template location");
 
@@ -79,6 +87,11 @@ public class TemplateGUI extends javax.swing.JFrame {
         lblOutput.setText("Output file");
 
         txtOutput.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtOutput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOutputActionPerformed(evt);
+            }
+        });
 
         chkAuto.setBackground(new java.awt.Color(255, 255, 255));
         chkAuto.setText("Recreate output if template is changed?");
@@ -96,6 +109,18 @@ public class TemplateGUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtError);
 
         lblError.setText("Error Msg:");
+
+        btnBaseDir.setBackground(new java.awt.Color(102, 102, 102));
+        btnBaseDir.setForeground(new java.awt.Color(255, 255, 255));
+        btnBaseDir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnBaseDir.setText("Browse");
+        btnBaseDir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnBaseDir.setOpaque(true);
+        btnBaseDir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBaseDirClicked(evt);
+            }
+        });
 
         btnTemplate.setBackground(new java.awt.Color(102, 102, 102));
         btnTemplate.setForeground(new java.awt.Color(255, 255, 255));
@@ -160,24 +185,43 @@ public class TemplateGUI extends javax.swing.JFrame {
                     .add(layout.createSequentialGroup()
                         .add(14, 14, 14)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(lblTemplate)
-                            .add(lblXML)
-                            .add(lblOutput))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                .add(txtTemplate)
-                                .add(txtXML)
-                                .add(txtOutput, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
-                            .add(chkAuto)
-                            .add(lblError))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(btnProcess, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                .add(btnTemplate, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                                .add(btnXML, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .add(btnOutput, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .add(layout.createSequentialGroup()
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                    .add(lblTemplate)
+                                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(lblOutput)
+                                        .add(lblXML)))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(layout.createSequentialGroup()
+                                        .add(txtTemplate)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(btnTemplate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 83, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                    .add(layout.createSequentialGroup()
+                                        .add(txtOutput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 340, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(btnOutput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 83, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                        .add(txtXML, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 340, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(btnXML, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 83, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                            .add(layout.createSequentialGroup()
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(layout.createSequentialGroup()
+                                        .add(119, 119, 119)
+                                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                            .add(chkAuto)
+                                            .add(layout.createSequentialGroup()
+                                                .add(29, 29, 29)
+                                                .add(lblError))))
+                                    .add(layout.createSequentialGroup()
+                                        .add(lblBaseDir)
+                                        .add(72, 72, 72)
+                                        .add(txtBaseDir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 340, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                                .add(6, 6, 6)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(btnProcess, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(btnBaseDir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 83, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(lblPicture, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 185, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -185,9 +229,18 @@ public class TemplateGUI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(10, 10, 10)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                .add(6, 6, 6)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
+                        .add(1, 1, 1)
+                        .add(lblPicture, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                        .add(28, 28, 28))
+                    .add(layout.createSequentialGroup()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(lblBaseDir)
+                            .add(btnBaseDir)
+                            .add(txtBaseDir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(lblTemplate)
                             .add(txtTemplate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -203,23 +256,16 @@ public class TemplateGUI extends javax.swing.JFrame {
                             .add(txtOutput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(btnOutput))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(layout.createSequentialGroup()
                                 .add(chkAuto)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(lblError))
-                            .add(layout.createSequentialGroup()
-                                .add(3, 3, 3)
-                                .add(btnProcess, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .add(layout.createSequentialGroup()
-                        .add(1, 1, 1)
-                        .add(lblPicture, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                            .add(btnProcess, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 42, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 342, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
-        getAccessibleContext().setAccessibleName("hayde Template Tester Version 0.5");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -309,7 +355,7 @@ public class TemplateGUI extends javax.swing.JFrame {
 			 */
 			File templateFile = new File(txtTemplate.getText());
 			try {
-				template = new Template("", templateFile.toURI().normalize().toString());
+				template = new Template("", txtBaseDir.getText(), templateFile.toURI().normalize().toString());
 				//template = new Template("file:/Users/senturk/Downloads/Sokhom/20130622/", "../search_withTags.html");
 				template.setDictionary(dict.getElements());
 				actions = template.process();
@@ -390,6 +436,29 @@ public class TemplateGUI extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_chkAutoActionPerformed
 
+    private void txtOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOutputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOutputActionPerformed
+
+    private void btnBaseDirClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBaseDirClicked
+       //In response to a button click:
+	   fcBaseDir.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+		int returnVal = fcBaseDir.showOpenDialog(TemplateGUI.this);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File file = fcBaseDir.getSelectedFile();
+
+			/*
+			 * open this file
+			 */
+			txtBaseDir.setText(file.getAbsolutePath());
+		} else {
+			/*
+			 * do nothing, the user canceled the opening
+			 */
+		}
+    }//GEN-LAST:event_btnBaseDirClicked
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -425,17 +494,20 @@ public class TemplateGUI extends javax.swing.JFrame {
 		});
 	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnBaseDir;
     private javax.swing.JLabel btnOutput;
     private javax.swing.JLabel btnProcess;
     private javax.swing.JLabel btnTemplate;
     private javax.swing.JLabel btnXML;
     private javax.swing.JCheckBox chkAuto;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBaseDir;
     private javax.swing.JLabel lblError;
     private javax.swing.JLabel lblOutput;
     private javax.swing.JLabel lblPicture;
     private javax.swing.JLabel lblTemplate;
     private javax.swing.JLabel lblXML;
+    private javax.swing.JTextField txtBaseDir;
     private javax.swing.JTextArea txtError;
     private javax.swing.JTextField txtOutput;
     private javax.swing.JTextField txtTemplate;

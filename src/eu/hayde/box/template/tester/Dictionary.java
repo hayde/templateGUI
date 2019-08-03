@@ -155,7 +155,8 @@ public class Dictionary {
 		} else if (javaObject.equals("java.lang.Integer")) {
 			returnValue = Integer.parseInt(objectValue);
 		} else if (javaObject.equals("java.util.Date")) {
-			returnValue = StringConverter.StringToDate(objectValue);
+			StringConverter sc = new StringConverter(null);
+			returnValue = sc.StringToDate(objectValue);
 		} else if (javaObject.equals("java.lang.Double")) {
 			returnValue = Double.parseDouble(objectValue);
 		} else if (javaObject.equals("java.lang.Boolean")) {
