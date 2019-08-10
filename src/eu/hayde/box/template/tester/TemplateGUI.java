@@ -37,6 +37,10 @@ public class TemplateGUI extends javax.swing.JFrame {
 	public TemplateGUI() {
 		initComponents();
 
+		if (txtTemplate.getText() != null && txtTemplate.getText().length() > 0) {
+			fcTemplate.setSelectedFile(new File(txtTemplate.getText()));
+		}
+
 		getContentPane().setBackground(Color.WHITE);
 	}
 
@@ -194,7 +198,7 @@ public class TemplateGUI extends javax.swing.JFrame {
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(layout.createSequentialGroup()
-                                        .add(txtTemplate)
+                                        .add(txtTemplate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                         .add(btnTemplate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 83, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                     .add(layout.createSequentialGroup()
@@ -354,8 +358,9 @@ public class TemplateGUI extends javax.swing.JFrame {
 			 * load the template
 			 */
 			File templateFile = new File(txtTemplate.getText());
+			File baseDir = new File( txtBaseDir.getText() );
 			try {
-				template = new Template("", txtBaseDir.getText(), templateFile.toURI().normalize().toString());
+				template = new Template("", baseDir.toURI().normalize().toString(), templateFile.toURI().normalize().toString());
 				//template = new Template("file:/Users/senturk/Downloads/Sokhom/20130622/", "../search_withTags.html");
 				template.setDictionary(dict.getElements());
 				actions = template.process();
